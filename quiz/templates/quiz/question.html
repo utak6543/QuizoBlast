@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</head>
+<body>
+`
+    <div class="container">
+        <br>
+
+        {% if questions_ob %}
+        <div class="row bg-warning">
+            <div class="col-md-12">
+                <form action="{% url 'result' user.id sub.id%}" method="POST">
+                    {% csrf_token %}
+                    <ol class="h3">
+                    {% for question_ob in questions_ob%}
+                    <li>
+                        {{question_ob.question}}
+                        <div>
+                            <input type="radio" id="option1" name="ques{{question_ob.id}}" value="{{question_ob.option1}}">
+                            <label for="option1">{{question_ob.option1}}</label><br>
+                        </div>
+                        <div>
+                            <input type="radio" id="option2" name="ques{{question_ob.id}}" value="{{question_ob.option2}}">
+                            <label for="option2">{{question_ob.option2}}</label><br>        
+                        </div>
+                        <div>
+                            <input type="radio" id="option3" name="ques{{question_ob.id}}" value="{{question_ob.option3}}">
+                            <label for="option3">{{question_ob.option3}}</label><br>
+                        </div>
+                        <div>
+                            <input type="radio" id="option4" name="ques{{question_ob.id}}" value="{{question_ob.option4}}">
+                            <label for="option4">{{question_ob.option4}}</label><br>
+                        </div>
+                    </li>
+                    <br>
+                    {% endfor %}
+                    </ol>
+                    <button class="btn btn-success" type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+        {% else %}
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-md-6 offset-4">
+                <div class="card bg-dark" style="width: 20rem; height: 10rem;">
+                    <br>
+                    <div class="card-body text-center">
+                      <h5 class="card-title text-warning">Coming Soon</h5>
+                      <a href="{% url 'homepage' %}" class="btn btn-warning text-dark"><b>Go back</b></a>
+                    </div>
+                </div>                  
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
