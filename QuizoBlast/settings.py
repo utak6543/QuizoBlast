@@ -26,7 +26,7 @@ SECRET_KEY = 'lu)wr_rg)c1eq9g@l^)x9czpagdredthx-q_f&779_&bb2=_!+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0','localhost','quizoblast.herokuapp.com']
 
 
 # Application definition
