@@ -3,7 +3,7 @@ from .models import QandA,Subject,Score
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User
 def homepage(request):    
-    sub=Subject.objects.all()
+    sub=Subject.objects.all().order_by('id')
     paginator=Paginator(sub,3)
     page=request.GET.get('page')
     sub=paginator.get_page(page)
