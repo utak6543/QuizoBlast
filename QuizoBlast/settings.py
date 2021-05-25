@@ -36,7 +36,7 @@ ALLOWED_HOSTS = ['127.0.0.1','localhost','quizoblast.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
-    # 'whitenoise.runserver_nostatic',
+    'whitenoise.runserver_nostatic',
     'users.apps.UsersConfig',
     'quiz.apps.QuizConfig',
     'django.contrib.admin',
@@ -94,7 +94,7 @@ DATABASES = {
         # 'PORT': '5432',
     }
 }
-
+WHITENOISE_USE_FINDERS = True
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
@@ -135,7 +135,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-# WHITENOISE_USE_FINDERS = True
+
 STATIC_URL = '/static/'
 STATIC_ROOT=os.path.join(BASE_DIR,'static')
 MEDIA_URL='/media/'
