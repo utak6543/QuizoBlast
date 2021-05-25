@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 import django_heroku
+import dj_database_url
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -21,12 +23,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'lu)wr_rg)c1eq9g@l^)x9czpagdredthx-q_f&779_&bb2=_!+'
+# SECRET_KEY = 'lu)wr_rg)c1eq9g@l^)x9czpagdredthx-q_f&779_&bb2=_!+'
 
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY','lu)wr_rg)c1eq9g@l^)x9czpagdredthx-q_f&779_&bb2=_!+')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
-ALLOWED_HOSTS = ['0.0.0.0','localhost','quizoblast.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1','localhost','quizoblast.herokuapp.com']
 
 
 # Application definition
@@ -44,6 +48,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -79,7 +84,13 @@ WSGI_APPLICATION = 'QuizoBlast.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': BASE_DIR / 'db.sqlite3',
+        # 'NAME': 'postgresql-animated-84791',
+        # 'USER': 'owrvjrfucwrson',
+        # 'PASSWORD': '3cdcb47ecb4134895d3ed99359f84e93e97357885e93da1409d1bd8270557533',
+        # 'HOST': 'ec2-107-20-153-39.compute-1.amazonaws.com',
+        # 'PORT': '5432',
     }
 }
 
@@ -127,4 +138,7 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 STATICFILES_DIRS=[os.path.join(BASE_DIR,'QuizoBlast/static')]
 LOGIN_REDIRECT_URL='homepage'
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 django_heroku.settings(locals())
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
