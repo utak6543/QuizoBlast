@@ -135,6 +135,7 @@ STATIC_ROOT=os.path.join(BASE_DIR,'static')
 MEDIA_URL='/media/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 STATICFILES_DIRS=[os.path.join(BASE_DIR,'QuizoBlast/static')]
+MEDIAFILES_DIRS=[os.path.join(BASE_DIR,'QuizoBlast/media')]
 LOGIN_REDIRECT_URL='homepage'
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
