@@ -85,13 +85,7 @@ WSGI_APPLICATION = 'QuizoBlast.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': BASE_DIR / 'db.sqlite3',
-        # 'NAME': 'postgresql-animated-84791',
-        # 'USER': 'owrvjrfucwrson',
-        # 'PASSWORD': '3cdcb47ecb4134895d3ed99359f84e93e97357885e93da1409d1bd8270557533',
-        # 'HOST': 'ec2-107-20-153-39.compute-1.amazonaws.com',
-        # 'PORT': '5432',
     }
 }
 WHITENOISE_USE_FINDERS = True
